@@ -1,4 +1,4 @@
-#/usr/bin/sh
+#!/usr/bin/env sh
 java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms128m -Xmx128m GCLogAnalysis
 java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms256m -Xmx256m GCLogAnalysis
 java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms512m -Xmx512m GCLogAnalysis
