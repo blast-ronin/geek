@@ -15,7 +15,7 @@ out/
 */.DS_Store
 .DS_Store
 .idea/
-*/.iml
+**/.iml
 # Package Files #
 *.jar
 *.war
