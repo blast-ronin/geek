@@ -1,27 +1,12 @@
 #!/usr/bin/env sh
-java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms128m -Xmx128m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms256m -Xmx256m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms512m -Xmx512m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms1024m -Xmx1024m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseSerialGC  -Xms2048m -Xmx2048m GCLogAnalysis
+mem_size=(128 256 512 1024 2048)
 
-
-java -Xlog:gc\*::t  -XX:+UseParallelGC  -Xms128m -Xmx128m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseParallelGC  -Xms256m -Xmx256m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseParallelGC  -Xms512m -Xmx512m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseParallelGC  -Xms1024m -Xmx1024m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseParallelGC  -Xms2048m -Xmx2048m GCLogAnalysis
-
-
-java -Xlog:gc\*::t  -XX:+UseG1GC  -Xms128m -Xmx128m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseG1GC  -Xms256m -Xmx256m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseG1GC  -Xms512m -Xmx512m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseG1GC  -Xms1024m -Xmx1024m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseG1GC  -Xms2048m -Xmx2048m GCLogAnalysis
-
-
-java -Xlog:gc\*::t  -XX:+UseConcMarkSweepGC  -Xms128m -Xmx128m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseConcMarkSweepGC  -Xms256m -Xmx256m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseConcMarkSweepGC  -Xms512m -Xmx512m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseConcMarkSweepGC  -Xms1024m -Xmx1024m GCLogAnalysis
-java -Xlog:gc\*::t  -XX:+UseConcMarkSweepGC  -Xms2048m -Xmx2048m GCLogAnalysis
+gc_type=("Serial" "Parallel" "G1" "ConcMarkSweep")
+cd ../out/production/week02-gc/
+for i in ${mem_size[@]} ;
+do
+  for j in ${gc_type[@]} ; do
+    echo use${j}GC mem_size=${i}m
+      java -Xlog:gc\*:file=../../../week02-gc/logs/Use${j}GC${i}m.txt:time:filecount=0  -XX:+Use${j}GC  -Xms${i}m -Xmx${i}m GCLogAnalysis
+  done
+done
