@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    maven { url "https://maven.aliyun.com/repository/spring" }
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
+}
+
+dependencies {
+    implementation "com.squareup.okhttp3:okhttp:+"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
